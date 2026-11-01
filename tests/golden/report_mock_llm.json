@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "generated_at": "2025-01-01T00:00:00Z",
+  "window_runs": 5,
+  "run_ids": [
+    "r1",
+    "r2",
+    "r3",
+    "r4",
+    "r5"
+  ],
+  "totals": {
+    "flaky": 3,
+    "broken": 1,
+    "stable": 1,
+    "insufficient": 0,
+    "tests": 5
+  },
+  "threshold": 0.1,
+  "tests": [
+    {
+      "test_id": "tests.ui.test_grid::test_row_text",
+      "framework": "pytest",
+      "metrics": {
+        "runs": 5,
+        "passes": 2,
+        "failures": 3,
+        "fail_rate": 0.6,
+        "flips": 4,
+        "flip_rate": 1.0,
+        "retry_pass_runs": 0,
+        "same_commit_mixed": true,
+        "score": 1.0,
+        "verdict": "flaky"
+      },
+      "signatures": [
+        {
+          "signature": "60beae1824",
+          "count": 3,
+          "exc_type": "org.openqa.selenium.StaleElementReferenceException",
+          "message": "stale element reference: element is not attached to the page document",
+          "trace": "org.openqa.selenium.StaleElementReferenceException: stale element reference\n\tat com.acme.pages.Grid.rowText(Grid.java:41)"
+        }
+      ],
+      "classification": {
+        "category": "stale_element",
+        "confidence": 1.0,
+        "rationale": "Bag-of-words match: attached, stale, staleelementreferenceexception",
+        "evidence": [
+          "attached",
+          "stale",
+          "staleelementreferenceexception"
+        ],
+        "engine": "mock-llm"
+      }
+    },
+    {
+      "test_id": "com.acme.CartTest::addItem",
+      "framework": "pytest",
+      "metrics": {
+        "runs": 5,
+        "passes": 5,
+        "failures": 0,
+        "fail_rate": 0.0,
+        "flips": 0,
+        "flip_rate": 0.0,
+        "retry_pass_runs": 2,
+        "same_commit_mixed": false,
+        "score": 0.8,
+        "verdict": "flaky"
+      },
+      "signatures": [
+        {
+          "signature": "805821547f",
+          "count": 2,
+          "exc_type": "org.openqa.selenium.TimeoutException",
+          "message": "Expected condition failed: waiting for visibility of element located by By.id: go",
+          "trace": "org.openqa.selenium.TimeoutException: Expected condition failed\n\tat com.acme.CartTest.addItem(CartTest.java:12)"
+        }
+      ],
+      "classification": {
+        "category": "timing_wait",
+        "confidence": 1.0,
+        "rationale": "Bag-of-words match: timeout, timeoutexception, visibility, waiting",
+        "evidence": [
+          "timeout",
+          "timeoutexception",
+          "visibility",
+          "waiting"
+        ],
+        "engine": "mock-llm"
+      }
+    },
+    {
+      "test_id": "tests.api.test_orders::test_create",
+      "framework": "pytest",
+      "metrics": {
+        "runs": 5,
+        "passes": 3,
+        "failures": 2,
+        "fail_rate": 0.4,
+        "flips": 3,
+        "flip_rate": 0.75,
+        "retry_pass_runs": 0,
+        "same_commit_mixed": true,
+        "score": 0.75,
+        "verdict": "flaky"
+      },
+      "signatures": [
+        {
+          "signature": "3ad6e5a0fb",
+          "count": 2,
+          "exc_type": "requests.exceptions.ConnectionError",
+          "message": "HTTPConnectionPool(host='api', port=8080): Max retries exceeded (Connection refused)",
+          "trace": "Traceback (most recent call last):\n  File \"tests/api/test_orders.py\", line 9, in test_create\nrequests.exceptions.ConnectionError"
+        }
+      ],
+      "classification": {
+        "category": "network_env",
+        "confidence": 0.82,
+        "rationale": "Bag-of-words match: connection, host, refused",
+        "evidence": [
+          "connection",
+          "host",
+          "refused"
+        ],
+        "engine": "mock-llm"
+      }
+    },
+    {
+      "test_id": "tests.test_checkout::test_total",
+      "framework": "pytest",
+      "metrics": {
+        "runs": 5,
+        "passes": 2,
+        "failures": 3,
+        "fail_rate": 0.6,
+        "flips": 1,
+        "flip_rate": 0.25,
+        "retry_pass_runs": 0,
+        "same_commit_mixed": false,
+        "score": 0.25,
+        "verdict": "broken"
+      },
+      "signatures": [
+        {
+          "signature": "503743567d",
+          "count": 3,
+          "exc_type": "AssertionError",
+          "message": "assert 500 == 200",
+          "trace": "AssertionError: assert 500 == 200"
+        }
+      ],
+      "classification": null
+    }
+  ],
+  "clusters": [],
+  "classify_engine": "mock-llm"
+}

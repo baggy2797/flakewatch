@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="com.acme.shop.web" timestamp="2025-01-01T00:00:00" tests="6">
+  <properties>
+    <property name="java.version" value="17.0.9" />
+  </properties>
+  <testcase classname="com.acme.shop.web.UploadTest" name="paginates5" time="6.438" />
+  <testcase classname="com.acme.shop.web.LoginTest" name="sortsTable75" time="5.830" />
+  <testcase classname="com.acme.shop.web.AdminTest" name="filtersResults70" time="5.541" />
+  <testcase classname="com.acme.shop.web.CheckoutTest" name="sortsTable74" time="6.183">
+    <flakyFailure message="Timed out after 15 seconds waiting for element to be clickable: By.cssSelector: .btn-primary" type="org.openqa.selenium.TimeoutException">org.openqa.selenium.TimeoutException: Timed out after 15 seconds waiting for element to be clickable: By.cssSelector: .btn-primary
+	at org.openqa.selenium.support.ui.FluentWait.timeoutException(FluentWait.java:262)
+	at com.acme.shop.pages.BasePage.click(BasePage.java:171)
+	at com.acme.shop.web.CheckoutTest.sortsTable74(CheckoutTest.java:178)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</flakyFailure>
+  </testcase>
+  <testcase classname="com.acme.shop.web.OrdersTest" name="sortsTable64" time="8.083" />
+  <testcase classname="com.acme.shop.web.CartTest" name="appliesCoupon71" time="0.423" />
+</testsuite>

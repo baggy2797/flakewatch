@@ -1,0 +1,137 @@
+name: flakewatch
+description: Detect flaky tests across CI runs from JUnit XML, classify the probable root cause, and report to the job summary / PR.
+author: baggy2797
+branding:
+  icon: activity
+  color: orange
+
+inputs:
+  junit-paths:
+    description: Whitespace-separated JUnit XML files, directories or globs (globstar enabled).
+    required: true
+  state-dir:
+    description: Directory holding history.db, quarantine.json and reports. Persisted with actions/cache when `cache` is true.
+    default: .flakewatch
+  cache:
+    description: Restore/save the state directory with actions/cache so history accumulates across runs.
+    default: "true"
+  engine:
+    description: Root-cause classifier - heuristic, mock-llm, llm (needs anthropic-api-key) or none.
+    default: heuristic
+  anthropic-api-key:
+    description: API key for engine=llm. Pass a secret; it is only exposed to the flakewatch step as an env var.
+    required: false
+    default: ""
+  window:
+    description: Analyse the most recent N runs.
+    default: "50"
+  threshold:
+    description: Minimum flakiness score to report a test as flaky.
+    default: "0.1"
+  quarantine:
+    description: Update the quarantine file (with TTL) from this analysis.
+    default: "true"
+  ttl-days:
+    description: Days before a quarantine entry expires unless the test is still flaky.
+    default: "14"
+  post-comment:
+    description: Post/update a sticky PR comment. Needs `pull-requests - write` and github-token.
+    default: "false"
+  github-token:
+    description: Token used for the PR comment.
+    required: false
+    default: ""
+  fail-on-flaky:
+    description: Fail the step if any flaky test is not quarantined.
+    default: "false"
+  python-version:
+    description: Python used to run flakewatch.
+    default: "3.12"
+
+outputs:
+  flaky-count:
+    description: Number of tests classified as flaky.
+    value: ${{ steps.run.outputs.flaky-count }}
+  report-json:
+    description: Path to the JSON report.
+    value: ${{ steps.run.outputs.report-json }}
+  report-md:
+    description: Path to the Markdown report.
+    value: ${{ steps.run.outputs.report-md }}
+  quarantine-file:
+    description: Path to the quarantine file.
+    value: ${{ steps.run.outputs.quarantine-file }}
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Restore flakewatch history
+      if: inputs.cache == 'true'
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: ${{ inputs.state-dir }}
+        # Caches are immutable per key, so every run writes a new key and restores the newest prior one.
+        key: flakewatch-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
+        restore-keys: |
+          flakewatch-${{ github.repository }}-
+
+    - name: Install flakewatch
+      shell: bash
+      env:
+        ACTION_PATH: ${{ github.action_path }}
+      run: python -m pip install --disable-pip-version-check --quiet "$ACTION_PATH"
+
+    - name: Analyze
+      id: run
+      shell: bash
+      env:
+        # Inputs go through env, never interpolated into the script (no expression injection).
+        IN_PATHS: ${{ inputs.junit-paths }}
+        IN_STATE: ${{ inputs.state-dir }}
+        IN_ENGINE: ${{ inputs.engine }}
+        IN_WINDOW: ${{ inputs.window }}
+        IN_THRESHOLD: ${{ inputs.threshold }}
+        IN_QUARANTINE: ${{ inputs.quarantine }}
+        IN_TTL: ${{ inputs.ttl-days }}
+        IN_POST: ${{ inputs.post-comment }}
+        IN_FAIL: ${{ inputs.fail-on-flaky }}
+        ANTHROPIC_API_KEY: ${{ inputs.anthropic-api-key }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+      run: |
+        set -uo pipefail
+        shopt -s globstar nullglob 2>/dev/null || shopt -s nullglob
+        paths=()
+        for p in $IN_PATHS; do paths+=("$p"); done   # unquoted on purpose: word-split + glob
+        if [ "${#paths[@]}" -eq 0 ]; then
+          echo "::error::junit-paths matched no files"; exit 2
+        fi
+        mkdir -p "$IN_STATE"
+        q="$IN_STATE/quarantine.json"
+        flags=(--db "$IN_STATE/history.db" --json-out "$IN_STATE/report.json" --md-out "$IN_STATE/report.md"
+               --engine "$IN_ENGINE" --window "$IN_WINDOW" --threshold "$IN_THRESHOLD" --summary)
+        [ "$IN_QUARANTINE" = "true" ] && flags+=(--quarantine-file "$q")
+        [ "$IN_FAIL" = "true" ] && flags+=(--fail-on-flaky)
+        rc=0
+        flakewatch analyze "${paths[@]}" "${flags[@]}" || rc=$?
+        if [ "$rc" -ge 2 ]; then exit "$rc"; fi
+        if [ "$IN_QUARANTINE" = "true" ]; then
+          flakewatch quarantine "$IN_STATE/report.json" --file "$q" --ttl-days "$IN_TTL"
+        fi
+        if [ "$IN_POST" = "true" ]; then
+          cargs=("$IN_STATE/report.json" --post)
+          [ "$IN_QUARANTINE" = "true" ] && cargs+=(--quarantine-file "$q")
+          flakewatch comment "${cargs[@]}"
+        fi
+        count=$(python -c 'import json,sys; r=json.load(open(sys.argv[1])); print(sum(t["metrics"]["verdict"]=="flaky" for t in r["tests"]))' "$IN_STATE/report.json")
+        {
+          echo "flaky-count=$count"
+          echo "report-json=$IN_STATE/report.json"
+          echo "report-md=$IN_STATE/report.md"
+          echo "quarantine-file=$q"
+        } >> "$GITHUB_OUTPUT"
+        exit "$rc"

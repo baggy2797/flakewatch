@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="jest tests" timestamp="2025-01-02T06:00:00" tests="3">
+  <testcase classname="Login page" name="Login page sorts table 27" time="2.579" />
+  <testcase classname="Login page" name="Login page opens modal 10" time="6.622" />
+  <testcase classname="Profile page" name="Profile page applies coupon 86" time="3.214" />
+</testsuite>

@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="pytest" timestamp="2025-01-01T06:00:00" tests="12">
+  <testcase classname="tests.ui.test_cart" name="test_applies_coupon_84" time="5.759" />
+  <testcase classname="tests.ui.test_upload" name="test_shows_total_47" time="4.150" />
+  <testcase classname="tests.ui.test_admin" name="test_shows_total_31" time="8.321" />
+  <testcase classname="tests.ui.test_admin" name="test_submits_form_73" time="8.786" />
+  <testcase classname="tests.ui.test_search" name="test_opens_modal_81" time="4.159" />
+  <testcase classname="tests.ui.test_search" name="test_submits_form_72" time="7.633" />
+  <testcase classname="tests.ui.test_report" name="test_exports_csv_39" time="5.639" />
+  <testcase classname="tests.ui.test_profile" name="test_deletes_row_64" time="2.616" />
+  <testcase classname="tests.ui.test_checkout" name="test_shows_total_66" time="2.679" />
+  <testcase classname="tests.ui.test_checkout" name="test_submits_form_94" time="3.691" />
+  <testcase classname="tests.ui.test_checkout" name="test_updates_avatar_8" time="4.444">
+    <failure message="AssertionError: assert 0.30000000000000004 == 0.3">Traceback (most recent call last):
+  File "/home/runner/work/shop/shop/tests/ui/test_checkout.py", line 44, in test_updates_avatar_8
+    page.act()
+AssertionError: assert 0.30000000000000004 == 0.3</failure>
+  </testcase>
+  <testcase classname="tests.ui.test_admin" name="test_applies_coupon_64" time="8.788" />
+</testsuite>

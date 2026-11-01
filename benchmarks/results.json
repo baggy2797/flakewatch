@@ -1,0 +1,159 @@
+{
+ "classification": {
+  "heuristic": {
+   "accuracy": 0.61,
+   "accuracy_dev": 0.667,
+   "accuracy_holdout": 0.552,
+   "accuracy_when_answered": 0.947,
+   "ambiguous_tests": 12,
+   "answered_rate": 0.644,
+   "confusion": {
+    "data": {
+     "data": 7,
+     "unknown": 3
+    },
+    "network_env": {
+     "network_env": 7,
+     "unknown": 2
+    },
+    "order_dependence": {
+     "data": 2,
+     "order_dependence": 2,
+     "unknown": 6
+    },
+    "shared_state": {
+     "shared_state": 7,
+     "unknown": 3
+    },
+    "stale_element": {
+     "stale_element": 6,
+     "unknown": 4
+    },
+    "timing_wait": {
+     "timing_wait": 7,
+     "unknown": 3
+    }
+   },
+   "n": 59,
+   "n_dev": 30,
+   "n_holdout": 29,
+   "per_class": {
+    "data": {
+     "precision": 0.778,
+     "recall": 0.7,
+     "support": 10
+    },
+    "network_env": {
+     "precision": 1.0,
+     "recall": 0.778,
+     "support": 9
+    },
+    "order_dependence": {
+     "precision": 1.0,
+     "recall": 0.2,
+     "support": 10
+    },
+    "shared_state": {
+     "precision": 1.0,
+     "recall": 0.7,
+     "support": 10
+    },
+    "stale_element": {
+     "precision": 1.0,
+     "recall": 0.6,
+     "support": 10
+    },
+    "timing_wait": {
+     "precision": 1.0,
+     "recall": 0.7,
+     "support": 10
+    }
+   }
+  },
+  "mock-llm": {
+   "accuracy": 0.39,
+   "accuracy_dev": 0.367,
+   "accuracy_holdout": 0.414,
+   "accuracy_when_answered": 0.885,
+   "ambiguous_tests": 12,
+   "answered_rate": 0.441,
+   "confusion": {
+    "data": {
+     "data": 4,
+     "order_dependence": 1,
+     "unknown": 5
+    },
+    "network_env": {
+     "network_env": 4,
+     "unknown": 5
+    },
+    "order_dependence": {
+     "data": 1,
+     "order_dependence": 3,
+     "unknown": 6
+    },
+    "shared_state": {
+     "shared_state": 5,
+     "unknown": 5
+    },
+    "stale_element": {
+     "stale_element": 3,
+     "unknown": 7
+    },
+    "timing_wait": {
+     "order_dependence": 1,
+     "timing_wait": 4,
+     "unknown": 5
+    }
+   },
+   "n": 59,
+   "n_dev": 30,
+   "n_holdout": 29,
+   "per_class": {
+    "data": {
+     "precision": 0.8,
+     "recall": 0.4,
+     "support": 10
+    },
+    "network_env": {
+     "precision": 1.0,
+     "recall": 0.444,
+     "support": 9
+    },
+    "order_dependence": {
+     "precision": 0.6,
+     "recall": 0.3,
+     "support": 10
+    },
+    "shared_state": {
+     "precision": 1.0,
+     "recall": 0.5,
+     "support": 10
+    },
+    "stale_element": {
+     "precision": 1.0,
+     "recall": 0.3,
+     "support": 10
+    },
+    "timing_wait": {
+     "precision": 1.0,
+     "recall": 0.4,
+     "support": 10
+    }
+   }
+  }
+ },
+ "detection": {
+  "false_positives_by_kind": {
+   "broken": 1
+  },
+  "flagged": 60,
+  "flaky_tests_labelled": 60,
+  "precision": 0.983,
+  "recall": 0.983
+ },
+ "runs": 30,
+ "seed": 1337,
+ "synthetic": true,
+ "tests": 126
+}

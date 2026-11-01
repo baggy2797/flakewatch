@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="com.acme.shop.web" timestamp="2025-01-03T00:00:00" tests="6">
+  <properties>
+    <property name="java.version" value="17.0.9" />
+  </properties>
+  <testcase classname="com.acme.shop.web.UploadTest" name="paginates5" time="2.410" />
+  <testcase classname="com.acme.shop.web.LoginTest" name="sortsTable75" time="1.292" />
+  <testcase classname="com.acme.shop.web.AdminTest" name="filtersResults70" time="2.427">
+    <flakyFailure message="expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
+	at com.acme.shop.pages.BasePage.click(BasePage.java:29)
+	at com.acme.shop.web.AdminTest.filtersResults70(AdminTest.java:36)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</flakyFailure>
+  </testcase>
+  <testcase classname="com.acme.shop.web.CheckoutTest" name="sortsTable74" time="3.815" />
+  <testcase classname="com.acme.shop.web.OrdersTest" name="sortsTable64" time="0.620">
+    <flakyFailure message="Singleton AppConfig still has overrides from a different test class: expected:&lt;DEFAULT&gt; but was:&lt;MOCK_3994&gt;" type="java.lang.AssertionError">java.lang.AssertionError: Singleton AppConfig still has overrides from a different test class: expected:&lt;DEFAULT&gt; but was:&lt;MOCK_3994&gt;
+	at com.acme.shop.pages.BasePage.click(BasePage.java:188)
+	at com.acme.shop.web.OrdersTest.sortsTable64(OrdersTest.java:195)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</flakyFailure>
+  </testcase>
+  <testcase classname="com.acme.shop.web.CartTest" name="appliesCoupon71" time="4.469">
+    <failure message="expected status 200 but got 500 from /api/v2/cart" type="java.lang.AssertionError">java.lang.AssertionError: expected status 200 but got 500 from /api/v2/cart
+	at com.acme.shop.pages.BasePage.click(BasePage.java:168)
+	at com.acme.shop.web.CartTest.appliesCoupon71(CartTest.java:175)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</failure>
+  </testcase>
+</testsuite>

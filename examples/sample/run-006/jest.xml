@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="jest tests" timestamp="2025-01-02T12:00:00" tests="3">
+  <testcase classname="Login page" name="Login page sorts table 27" time="7.160" />
+  <testcase classname="Login page" name="Login page opens modal 10" time="7.612">
+    <failure>Error: listen EADDRINUSE: address already in use :::5480
+    at Object.&lt;anonymous&gt; (tests/Login page.test.js:119:15)</failure>
+  </testcase>
+  <testcase classname="Profile page" name="Profile page applies coupon 86" time="3.856">
+    <failure>Error: getaddrinfo EAI_AGAIN registry.npmjs.org
+    at Object.&lt;anonymous&gt; (tests/Profile page.test.js:161:19)</failure>
+  </testcase>
+</testsuite>

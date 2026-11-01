@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="jest tests" timestamp="2025-01-03T06:00:00" tests="3">
+  <testcase classname="Login page" name="Login page sorts table 27" time="3.440" />
+  <testcase classname="Login page" name="Login page opens modal 10" time="4.794">
+    <failure>Error: listen EADDRINUSE: address already in use :::9266
+    at Object.&lt;anonymous&gt; (tests/Login page.test.js:159:37)</failure>
+  </testcase>
+  <testcase classname="Profile page" name="Profile page applies coupon 86" time="8.073" />
+</testsuite>

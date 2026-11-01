@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="com.acme.shop.web" timestamp="2025-01-02T12:00:00" tests="6">
+  <properties>
+    <property name="java.version" value="17.0.9" />
+  </properties>
+  <testcase classname="com.acme.shop.web.UploadTest" name="paginates5" time="2.516" />
+  <testcase classname="com.acme.shop.web.LoginTest" name="sortsTable75" time="6.945" />
+  <testcase classname="com.acme.shop.web.AdminTest" name="filtersResults70" time="7.643" />
+  <testcase classname="com.acme.shop.web.CheckoutTest" name="sortsTable74" time="5.178">
+    <flakyFailure message="Timed out after 15 seconds waiting for element to be clickable: By.cssSelector: .btn-primary" type="org.openqa.selenium.TimeoutException">org.openqa.selenium.TimeoutException: Timed out after 15 seconds waiting for element to be clickable: By.cssSelector: .btn-primary
+	at org.openqa.selenium.support.ui.FluentWait.timeoutException(FluentWait.java:262)
+	at com.acme.shop.pages.BasePage.click(BasePage.java:80)
+	at com.acme.shop.web.CheckoutTest.sortsTable74(CheckoutTest.java:87)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</flakyFailure>
+  </testcase>
+  <testcase classname="com.acme.shop.web.OrdersTest" name="sortsTable64" time="6.498">
+    <failure message="Singleton AppConfig still has overrides from a different test class: expected:&lt;DEFAULT&gt; but was:&lt;MOCK_800&gt;" type="java.lang.AssertionError">java.lang.AssertionError: Singleton AppConfig still has overrides from a different test class: expected:&lt;DEFAULT&gt; but was:&lt;MOCK_800&gt;
+	at com.acme.shop.pages.BasePage.click(BasePage.java:234)
+	at com.acme.shop.web.OrdersTest.sortsTable64(OrdersTest.java:241)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</failure>
+  </testcase>
+  <testcase classname="com.acme.shop.web.CartTest" name="appliesCoupon71" time="8.035">
+    <failure message="expected status 200 but got 500 from /api/v2/cart" type="java.lang.AssertionError">java.lang.AssertionError: expected status 200 but got 500 from /api/v2/cart
+	at com.acme.shop.pages.BasePage.click(BasePage.java:68)
+	at com.acme.shop.web.CartTest.appliesCoupon71(CartTest.java:75)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</failure>
+  </testcase>
+</testsuite>
