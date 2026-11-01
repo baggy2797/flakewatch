@@ -1,5 +1,7 @@
 # flakewatch
 
+[![CI](https://github.com/baggy2797/flakewatch/actions/workflows/ci.yml/badge.svg)](https://github.com/baggy2797/flakewatch/actions/workflows/ci.yml)
+
 Find flaky tests across many CI runs from the JUnit XML you already produce, work out *why* each one is probably flaky, and keep them from blocking merges: with a PR comment, a JSON report and a quarantine file whose entries expire.
 
 It is a Python CLI (`flakewatch`), a Docker image and a composite GitHub Action. It understands pytest, TestNG/Surefire (including `flakyFailure`/`rerunFailure` retry elements) and jest-junit output, and it has a rule set aimed at **Selenium** failures (`StaleElementReferenceException`, `TimeoutException`, `NoSuchElementException`, `ElementClickInterceptedException`, ...), because "which flaky tests are really stale-element races" is the question UI-test owners ask first.
