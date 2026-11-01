@@ -126,7 +126,7 @@ class AnthropicClient:
     URL = "https://api.anthropic.com/v1/messages"
 
     def __init__(self, model: str | None = None, timeout: float = 30.0) -> None:
-        self.model = model or os.environ.get("FLAKEWATCH_MODEL", "claude-sonnet-4-5")
+        self.model = model or os.environ.get("FLAKEWATCH_MODEL", "claude-sonnet-5-5")
         self.timeout = timeout
         self.name = f"llm:{self.model}"
         self._key = os.environ.get("ANTHROPIC_API_KEY", "")
