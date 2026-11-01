@@ -133,7 +133,10 @@ def test_github_env_defaults_for_run_id(run_dirs, tmp_path, monkeypatch):
     s.close()
 
 
-def test_local_run_id_is_content_hash(run_dirs, tmp_path):
+def test_local_run_id_is_content_hash(run_dirs, tmp_path, monkeypatch):
+    # CI sets GITHUB_RUN_ID; this test is about the local fallback, so it must not depend on the environment.
+    monkeypatch.delenv("GITHUB_RUN_ID", raising=False)
+    monkeypatch.delenv("GITHUB_RUN_ATTEMPT", raising=False)
     _, d = run_dirs[0]
     db = tmp_path / "h.db"
     runner.invoke(app, ["analyze", str(d), "--db", str(db)])
