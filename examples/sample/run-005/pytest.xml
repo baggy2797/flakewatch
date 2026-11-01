@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="pytest" timestamp="2025-01-02T06:00:00" tests="12">
+  <testcase classname="tests.ui.test_cart" name="test_applies_coupon_84" time="0.834" />
+  <testcase classname="tests.ui.test_upload" name="test_shows_total_47" time="8.657" />
+  <testcase classname="tests.ui.test_admin" name="test_shows_total_31" time="8.284" />
+  <testcase classname="tests.ui.test_admin" name="test_submits_form_73" time="5.792" />
+  <testcase classname="tests.ui.test_search" name="test_opens_modal_81" time="6.486" />
+  <testcase classname="tests.ui.test_search" name="test_submits_form_72" time="8.001" />
+  <testcase classname="tests.ui.test_report" name="test_exports_csv_39" time="3.779" />
+  <testcase classname="tests.ui.test_profile" name="test_deletes_row_64" time="2.517" />
+  <testcase classname="tests.ui.test_checkout" name="test_shows_total_66" time="2.784" />
+  <testcase classname="tests.ui.test_checkout" name="test_submits_form_94" time="4.912" />
+  <testcase classname="tests.ui.test_checkout" name="test_updates_avatar_8" time="5.205" />
+  <testcase classname="tests.ui.test_admin" name="test_applies_coupon_64" time="8.821" />
+</testsuite>

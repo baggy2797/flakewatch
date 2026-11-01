@@ -1,0 +1,29 @@
+# Try flakewatch against the bundled SYNTHETIC sample without installing Python:
+#   docker compose up --build        # ingests 12 sample runs, prints the PR-comment Markdown
+#   docker compose run --rm flakewatch --help
+# History persists in the named volume `flakewatch-history`; run again and it accumulates
+# (re-ingesting the same run ids is idempotent).
+services:
+  flakewatch:
+    build: .
+    image: flakewatch:local
+    volumes:
+      - flakewatch-history:/work/.flakewatch
+      - ./examples:/work/examples:ro
+    entrypoint: ["bash", "-c"]
+    command:
+      - |
+        examples/ingest_sample.sh /work/.flakewatch/history.db /tmp/out
+        cat /tmp/out/comment.md
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    # To use a real model instead of the heuristic, add to ingest_sample.sh's flags
+    # `--engine llm` and pass the key from your shell (never bake it into the image):
+    # environment:
+    #   ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+
+volumes:
+  flakewatch-history:

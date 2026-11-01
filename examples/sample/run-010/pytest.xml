@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="pytest" timestamp="2025-01-03T12:00:00" tests="12">
+  <testcase classname="tests.ui.test_cart" name="test_applies_coupon_84" time="8.790" />
+  <testcase classname="tests.ui.test_upload" name="test_shows_total_47" time="6.964" />
+  <testcase classname="tests.ui.test_admin" name="test_shows_total_31" time="7.643" />
+  <testcase classname="tests.ui.test_admin" name="test_submits_form_73" time="7.276" />
+  <testcase classname="tests.ui.test_search" name="test_opens_modal_81" time="6.767" />
+  <testcase classname="tests.ui.test_search" name="test_submits_form_72" time="7.495" />
+  <testcase classname="tests.ui.test_report" name="test_exports_csv_39" time="6.980" />
+  <testcase classname="tests.ui.test_profile" name="test_deletes_row_64" time="2.440">
+    <failure message="KeyError: 'auth_token'">Traceback (most recent call last):
+  File "/home/runner/work/shop/shop/tests/ui/test_profile.py", line 240, in test_deletes_row_64
+    page.act()
+KeyError: 'auth_token'</failure>
+  </testcase>
+  <testcase classname="tests.ui.test_checkout" name="test_shows_total_66" time="4.462" />
+  <testcase classname="tests.ui.test_checkout" name="test_submits_form_94" time="0.311">
+    <failure message="OSError: [Errno 28] No space left on device: '/tmp/pytest-of-runner/pytest-7389'">Traceback (most recent call last):
+  File "/home/runner/work/shop/shop/tests/ui/test_checkout.py", line 75, in test_submits_form_94
+    page.act()
+OSError: [Errno 28] No space left on device: '/tmp/pytest-of-runner/pytest-7389'</failure>
+  </testcase>
+  <testcase classname="tests.ui.test_checkout" name="test_submits_form_94" time="2.868" />
+  <testcase classname="tests.ui.test_checkout" name="test_updates_avatar_8" time="3.790" />
+  <testcase classname="tests.ui.test_admin" name="test_applies_coupon_64" time="8.259" />
+</testsuite>

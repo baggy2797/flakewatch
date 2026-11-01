@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="jest tests" timestamp="2025-01-01T18:00:00" tests="3">
+  <testcase classname="Login page" name="Login page sorts table 27" time="4.565" />
+  <testcase classname="Login page" name="Login page opens modal 10" time="5.010" />
+  <testcase classname="Profile page" name="Profile page applies coupon 86" time="5.314">
+    <failure>Error: getaddrinfo EAI_AGAIN registry.npmjs.org
+    at Object.&lt;anonymous&gt; (tests/Profile page.test.js:174:5)</failure>
+  </testcase>
+</testsuite>

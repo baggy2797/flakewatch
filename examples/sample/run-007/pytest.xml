@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="pytest" timestamp="2025-01-02T18:00:00" tests="12">
+  <testcase classname="tests.ui.test_cart" name="test_applies_coupon_84" time="6.729" />
+  <testcase classname="tests.ui.test_upload" name="test_shows_total_47" time="3.676" />
+  <testcase classname="tests.ui.test_admin" name="test_shows_total_31" time="3.780" />
+  <testcase classname="tests.ui.test_admin" name="test_submits_form_73" time="7.262" />
+  <testcase classname="tests.ui.test_search" name="test_opens_modal_81" time="2.495" />
+  <testcase classname="tests.ui.test_search" name="test_submits_form_72" time="5.608" />
+  <testcase classname="tests.ui.test_report" name="test_exports_csv_39" time="0.700">
+    <failure message="playwright._impl._errors.Error: ElementHandle.click: Element is not attached to the DOM">Traceback (most recent call last):
+  File "/home/runner/work/shop/shop/tests/ui/test_report.py", line 122, in test_exports_csv_39
+    page.act()
+playwright._impl._errors.Error: ElementHandle.click: Element is not attached to the DOM</failure>
+  </testcase>
+  <testcase classname="tests.ui.test_report" name="test_exports_csv_39" time="2.199" />
+  <testcase classname="tests.ui.test_profile" name="test_deletes_row_64" time="6.465" />
+  <testcase classname="tests.ui.test_checkout" name="test_shows_total_66" time="6.154">
+    <failure message="pytest.fail.Exception: fixture 'seeded_catalog' was not populated; setup_module never ran">Traceback (most recent call last):
+  File "/home/runner/work/shop/shop/tests/ui/test_checkout.py", line 182, in test_shows_total_66
+    page.act()
+pytest.fail.Exception: fixture 'seeded_catalog' was not populated; setup_module never ran</failure>
+  </testcase>
+  <testcase classname="tests.ui.test_checkout" name="test_submits_form_94" time="1.210">
+    <failure message="OSError: [Errno 28] No space left on device: '/tmp/pytest-of-runner/pytest-3574'">Traceback (most recent call last):
+  File "/home/runner/work/shop/shop/tests/ui/test_checkout.py", line 158, in test_submits_form_94
+    page.act()
+OSError: [Errno 28] No space left on device: '/tmp/pytest-of-runner/pytest-3574'</failure>
+  </testcase>
+  <testcase classname="tests.ui.test_checkout" name="test_updates_avatar_8" time="7.841" />
+  <testcase classname="tests.ui.test_admin" name="test_applies_coupon_64" time="8.663">
+    <failure message="AssertionError">Traceback (most recent call last):
+  File "/home/runner/work/shop/shop/tests/ui/test_admin.py", line 38, in test_applies_coupon_64
+    page.act()
+AssertionError</failure>
+  </testcase>
+  <testcase classname="tests.ui.test_admin" name="test_applies_coupon_64" time="5.441" />
+</testsuite>

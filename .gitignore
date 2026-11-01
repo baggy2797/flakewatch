@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.coverage
+coverage.xml
+dist/
+*.egg-info/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.flakewatch/
+benchmarks/_corpus/

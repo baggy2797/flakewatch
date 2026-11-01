@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="com.acme.shop.web" timestamp="2025-01-03T18:00:00" tests="6">
+  <properties>
+    <property name="java.version" value="17.0.9" />
+  </properties>
+  <testcase classname="com.acme.shop.web.UploadTest" name="paginates5" time="1.272" />
+  <testcase classname="com.acme.shop.web.LoginTest" name="sortsTable75" time="1.724" />
+  <testcase classname="com.acme.shop.web.AdminTest" name="filtersResults70" time="2.854" />
+  <testcase classname="com.acme.shop.web.CheckoutTest" name="sortsTable74" time="5.132">
+    <failure message="Timed out after 15 seconds waiting for element to be clickable: By.cssSelector: .btn-primary" type="org.openqa.selenium.TimeoutException">org.openqa.selenium.TimeoutException: Timed out after 15 seconds waiting for element to be clickable: By.cssSelector: .btn-primary
+	at org.openqa.selenium.support.ui.FluentWait.timeoutException(FluentWait.java:262)
+	at com.acme.shop.pages.BasePage.click(BasePage.java:128)
+	at com.acme.shop.web.CheckoutTest.sortsTable74(CheckoutTest.java:135)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</failure>
+  </testcase>
+  <testcase classname="com.acme.shop.web.OrdersTest" name="sortsTable64" time="2.965" />
+  <testcase classname="com.acme.shop.web.CartTest" name="appliesCoupon71" time="0.653">
+    <failure message="expected status 200 but got 500 from /api/v2/cart" type="java.lang.AssertionError">java.lang.AssertionError: expected status 200 but got 500 from /api/v2/cart
+	at com.acme.shop.pages.BasePage.click(BasePage.java:207)
+	at com.acme.shop.web.CartTest.appliesCoupon71(CartTest.java:214)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</failure>
+  </testcase>
+</testsuite>

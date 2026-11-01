@@ -1,0 +1,68 @@
+name: Self-test
+
+# Runs the composite action (./) on the bundled SYNTHETIC sample data and asserts on the output.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions: {}
+
+jobs:
+  action:
+    name: Action on sample data (${{ matrix.engine }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [heuristic, mock-llm]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Seed history with the first 11 sample runs via the CLI...
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - run: python -m pip install .
+      - name: Seed history (runs 000-010)
+        env:
+          RUN_LIMIT: "11"
+        run: examples/ingest_sample.sh .flakewatch/history.db .flakewatch/seed-out
+
+      # ...then run the action itself on the 12th run.
+      - name: flakewatch action
+        id: fw
+        uses: ./
+        with:
+          junit-paths: examples/sample/run-011/*.xml
+          engine: ${{ matrix.engine }}
+          cache: "false"
+          ttl-days: "7"
+
+      - name: Assert results
+        env:
+          FLAKY_COUNT: ${{ steps.fw.outputs.flaky-count }}
+          REPORT: ${{ steps.fw.outputs.report-json }}
+          QUARANTINE: ${{ steps.fw.outputs.quarantine-file }}
+          ENGINE: ${{ matrix.engine }}
+        run: |
+          python - <<'PY'
+          import json, os
+          rep = json.load(open(os.environ["REPORT"]))
+          flaky = [t for t in rep["tests"] if t["metrics"]["verdict"] == "flaky"]
+          assert int(os.environ["FLAKY_COUNT"]) == len(flaky) >= 8, len(flaky)
+          assert rep["window_runs"] == 12, rep["window_runs"]
+          assert rep["classify_engine"] == os.environ["ENGINE"], rep["classify_engine"]
+          cats = {t["classification"]["category"] for t in flaky if t["classification"]}
+          assert "timing_wait" in cats and len(cats) >= 3, cats
+          if os.environ["ENGINE"] == "heuristic":
+              assert "stale_element" in cats, cats
+          q = json.load(open(os.environ["QUARANTINE"]))
+          assert q["entries"], "quarantine file is empty"
+          print(f"ok: {len(flaky)} flaky, categories={sorted(cats)}, quarantined={len(q['entries'])}")
+          PY

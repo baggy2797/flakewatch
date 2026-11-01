@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="pytest" timestamp="2025-01-01T12:00:00" tests="12">
+  <testcase classname="tests.ui.test_cart" name="test_applies_coupon_84" time="5.457" />
+  <testcase classname="tests.ui.test_upload" name="test_shows_total_47" time="8.606" />
+  <testcase classname="tests.ui.test_admin" name="test_shows_total_31" time="0.201" />
+  <testcase classname="tests.ui.test_admin" name="test_submits_form_73" time="5.995" />
+  <testcase classname="tests.ui.test_search" name="test_opens_modal_81" time="7.666" />
+  <testcase classname="tests.ui.test_search" name="test_submits_form_72" time="7.594" />
+  <testcase classname="tests.ui.test_report" name="test_exports_csv_39" time="2.158" />
+  <testcase classname="tests.ui.test_profile" name="test_deletes_row_64" time="1.554" />
+  <testcase classname="tests.ui.test_checkout" name="test_shows_total_66" time="1.538">
+    <failure message="AssertionError: assert counter.value == 1  # passes in isolation, got 1924 in full run">Traceback (most recent call last):
+  File "/home/runner/work/shop/shop/tests/ui/test_checkout.py", line 235, in test_shows_total_66
+    page.act()
+AssertionError: assert counter.value == 1  # passes in isolation, got 1924 in full run</failure>
+  </testcase>
+  <testcase classname="tests.ui.test_checkout" name="test_shows_total_66" time="0.389" />
+  <testcase classname="tests.ui.test_checkout" name="test_submits_form_94" time="3.367">
+    <failure message="selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_RESET">Traceback (most recent call last):
+  File "/home/runner/work/shop/shop/tests/ui/test_checkout.py", line 48, in test_submits_form_94
+    page.act()
+selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_RESET</failure>
+  </testcase>
+  <testcase classname="tests.ui.test_checkout" name="test_updates_avatar_8" time="5.076" />
+  <testcase classname="tests.ui.test_admin" name="test_applies_coupon_64" time="8.352" />
+</testsuite>

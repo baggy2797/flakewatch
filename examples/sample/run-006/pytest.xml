@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="pytest" timestamp="2025-01-02T12:00:00" tests="12">
+  <testcase classname="tests.ui.test_cart" name="test_applies_coupon_84" time="4.353" />
+  <testcase classname="tests.ui.test_upload" name="test_shows_total_47" time="6.719" />
+  <testcase classname="tests.ui.test_admin" name="test_shows_total_31" time="5.933" />
+  <testcase classname="tests.ui.test_admin" name="test_submits_form_73" time="1.609" />
+  <testcase classname="tests.ui.test_search" name="test_opens_modal_81" time="0.550" />
+  <testcase classname="tests.ui.test_search" name="test_submits_form_72" time="8.281" />
+  <testcase classname="tests.ui.test_report" name="test_exports_csv_39" time="3.030">
+    <failure message="playwright._impl._errors.Error: ElementHandle.click: Element is not attached to the DOM">Traceback (most recent call last):
+  File "/home/runner/work/shop/shop/tests/ui/test_report.py", line 188, in test_exports_csv_39
+    page.act()
+playwright._impl._errors.Error: ElementHandle.click: Element is not attached to the DOM</failure>
+  </testcase>
+  <testcase classname="tests.ui.test_report" name="test_exports_csv_39" time="2.695" />
+  <testcase classname="tests.ui.test_profile" name="test_deletes_row_64" time="1.057" />
+  <testcase classname="tests.ui.test_checkout" name="test_shows_total_66" time="3.238">
+    <failure message="pytest.fail.Exception: fixture 'seeded_catalog' was not populated; setup_module never ran">Traceback (most recent call last):
+  File "/home/runner/work/shop/shop/tests/ui/test_checkout.py", line 31, in test_shows_total_66
+    page.act()
+pytest.fail.Exception: fixture 'seeded_catalog' was not populated; setup_module never ran</failure>
+  </testcase>
+  <testcase classname="tests.ui.test_checkout" name="test_submits_form_94" time="5.914" />
+  <testcase classname="tests.ui.test_checkout" name="test_updates_avatar_8" time="4.660" />
+  <testcase classname="tests.ui.test_admin" name="test_applies_coupon_64" time="0.733" />
+</testsuite>

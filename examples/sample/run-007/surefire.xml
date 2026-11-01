@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="com.acme.shop.web" timestamp="2025-01-02T18:00:00" tests="6">
+  <properties>
+    <property name="java.version" value="17.0.9" />
+  </properties>
+  <testcase classname="com.acme.shop.web.UploadTest" name="paginates5" time="2.067" />
+  <testcase classname="com.acme.shop.web.LoginTest" name="sortsTable75" time="8.862" />
+  <testcase classname="com.acme.shop.web.AdminTest" name="filtersResults70" time="1.625">
+    <flakyFailure message="expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
+	at com.acme.shop.pages.BasePage.click(BasePage.java:52)
+	at com.acme.shop.web.AdminTest.filtersResults70(AdminTest.java:59)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</flakyFailure>
+  </testcase>
+  <testcase classname="com.acme.shop.web.CheckoutTest" name="sortsTable74" time="0.840">
+    <flakyFailure message="Timed out after 15 seconds waiting for element to be clickable: By.cssSelector: .btn-primary" type="org.openqa.selenium.TimeoutException">org.openqa.selenium.TimeoutException: Timed out after 15 seconds waiting for element to be clickable: By.cssSelector: .btn-primary
+	at org.openqa.selenium.support.ui.FluentWait.timeoutException(FluentWait.java:262)
+	at com.acme.shop.pages.BasePage.click(BasePage.java:114)
+	at com.acme.shop.web.CheckoutTest.sortsTable74(CheckoutTest.java:121)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</flakyFailure>
+  </testcase>
+  <testcase classname="com.acme.shop.web.OrdersTest" name="sortsTable64" time="4.543" />
+  <testcase classname="com.acme.shop.web.CartTest" name="appliesCoupon71" time="0.544">
+    <failure message="expected status 200 but got 500 from /api/v2/cart" type="java.lang.AssertionError">java.lang.AssertionError: expected status 200 but got 500 from /api/v2/cart
+	at com.acme.shop.pages.BasePage.click(BasePage.java:90)
+	at com.acme.shop.web.CartTest.appliesCoupon71(CartTest.java:97)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</failure>
+  </testcase>
+</testsuite>

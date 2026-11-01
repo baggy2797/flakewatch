@@ -1,0 +1,215 @@
+{
+ "runs": [
+  {
+   "commit": "b3eb6d1d1453d385dde75058d1d2a1e8bfd3761d",
+   "run_id": "run-000",
+   "timestamp": 1735689600
+  },
+  {
+   "commit": "b3eb6d1d1453d385dde75058d1d2a1e8bfd3761d",
+   "run_id": "run-001",
+   "timestamp": 1735711200
+  },
+  {
+   "commit": "dd90b5e3a71d6c0358683de5e769a3395a1f454b",
+   "run_id": "run-002",
+   "timestamp": 1735732800
+  },
+  {
+   "commit": "6c2b0e9d5eb654d0723ffe0514158c26176984b3",
+   "run_id": "run-003",
+   "timestamp": 1735754400
+  },
+  {
+   "commit": "6c2b0e9d5eb654d0723ffe0514158c26176984b3",
+   "run_id": "run-004",
+   "timestamp": 1735776000
+  },
+  {
+   "commit": "632366e0e850df51513601fbcdcee594c7ec858b",
+   "run_id": "run-005",
+   "timestamp": 1735797600
+  },
+  {
+   "commit": "b6de62130948526627204c369324f97c96ae7b78",
+   "run_id": "run-006",
+   "timestamp": 1735819200
+  },
+  {
+   "commit": "b6de62130948526627204c369324f97c96ae7b78",
+   "run_id": "run-007",
+   "timestamp": 1735840800
+  },
+  {
+   "commit": "7f0921b8c11111961e8ea16ee0dba1bb4e9556c3",
+   "run_id": "run-008",
+   "timestamp": 1735862400
+  },
+  {
+   "commit": "ea37ed43a0841541ec3c27ea218752b99179fca7",
+   "run_id": "run-009",
+   "timestamp": 1735884000
+  },
+  {
+   "commit": "ea37ed43a0841541ec3c27ea218752b99179fca7",
+   "run_id": "run-010",
+   "timestamp": 1735905600
+  },
+  {
+   "commit": "ca2c06fc82152fcb5aa543124e877819eea1fa24",
+   "run_id": "run-011",
+   "timestamp": 1735927200
+  }
+ ],
+ "seed": 7,
+ "synthetic": true,
+ "tests": {
+  "Login page::Login page opens modal 10": {
+   "ambiguous": false,
+   "cause": "shared_state",
+   "framework": "jest",
+   "kind": "flaky",
+   "split": "dev"
+  },
+  "Login page::Login page sorts table 27": {
+   "ambiguous": false,
+   "cause": "stale_element",
+   "framework": "jest",
+   "kind": "flaky",
+   "split": "dev"
+  },
+  "Profile page::Profile page applies coupon 86": {
+   "ambiguous": false,
+   "cause": "network_env",
+   "framework": "jest",
+   "kind": "flaky",
+   "split": "holdout"
+  },
+  "com.acme.shop.web.AdminTest::filtersResults70": {
+   "ambiguous": true,
+   "cause": "timing_wait",
+   "framework": "surefire",
+   "kind": "flaky",
+   "split": "dev"
+  },
+  "com.acme.shop.web.CartTest::appliesCoupon71": {
+   "ambiguous": false,
+   "cause": null,
+   "framework": "surefire",
+   "kind": "broken",
+   "split": null
+  },
+  "com.acme.shop.web.CheckoutTest::sortsTable74": {
+   "ambiguous": false,
+   "cause": "timing_wait",
+   "framework": "surefire",
+   "kind": "flaky",
+   "split": "holdout"
+  },
+  "com.acme.shop.web.LoginTest::sortsTable75": {
+   "ambiguous": false,
+   "cause": null,
+   "framework": "surefire",
+   "kind": "stable",
+   "split": null
+  },
+  "com.acme.shop.web.OrdersTest::sortsTable64": {
+   "ambiguous": false,
+   "cause": "shared_state",
+   "framework": "surefire",
+   "kind": "flaky",
+   "split": "holdout"
+  },
+  "com.acme.shop.web.UploadTest::paginates5": {
+   "ambiguous": false,
+   "cause": null,
+   "framework": "surefire",
+   "kind": "stable",
+   "split": null
+  },
+  "tests.ui.test_admin::test_applies_coupon_64": {
+   "ambiguous": true,
+   "cause": "data",
+   "framework": "pytest",
+   "kind": "flaky",
+   "split": "holdout"
+  },
+  "tests.ui.test_admin::test_shows_total_31": {
+   "ambiguous": false,
+   "cause": null,
+   "framework": "pytest",
+   "kind": "stable",
+   "split": null
+  },
+  "tests.ui.test_admin::test_submits_form_73": {
+   "ambiguous": false,
+   "cause": null,
+   "framework": "pytest",
+   "kind": "stable",
+   "split": null
+  },
+  "tests.ui.test_cart::test_applies_coupon_84": {
+   "ambiguous": false,
+   "cause": null,
+   "framework": "pytest",
+   "kind": "stable",
+   "split": null
+  },
+  "tests.ui.test_checkout::test_shows_total_66": {
+   "ambiguous": false,
+   "cause": "order_dependence",
+   "framework": "pytest",
+   "kind": "flaky",
+   "split": "holdout"
+  },
+  "tests.ui.test_checkout::test_submits_form_94": {
+   "ambiguous": false,
+   "cause": "network_env",
+   "framework": "pytest",
+   "kind": "flaky",
+   "split": "dev"
+  },
+  "tests.ui.test_checkout::test_updates_avatar_8": {
+   "ambiguous": false,
+   "cause": "data",
+   "framework": "pytest",
+   "kind": "flaky",
+   "split": "dev"
+  },
+  "tests.ui.test_profile::test_deletes_row_64": {
+   "ambiguous": false,
+   "cause": "order_dependence",
+   "framework": "pytest",
+   "kind": "flaky",
+   "split": "dev"
+  },
+  "tests.ui.test_report::test_exports_csv_39": {
+   "ambiguous": false,
+   "cause": "stale_element",
+   "framework": "pytest",
+   "kind": "flaky",
+   "split": "holdout"
+  },
+  "tests.ui.test_search::test_opens_modal_81": {
+   "ambiguous": false,
+   "cause": null,
+   "framework": "pytest",
+   "kind": "stable",
+   "split": null
+  },
+  "tests.ui.test_search::test_submits_form_72": {
+   "ambiguous": false,
+   "cause": null,
+   "framework": "pytest",
+   "kind": "stable",
+   "split": null
+  },
+  "tests.ui.test_upload::test_shows_total_47": {
+   "ambiguous": false,
+   "cause": null,
+   "framework": "pytest",
+   "kind": "stable",
+   "split": null
+  }
+ }
+}
