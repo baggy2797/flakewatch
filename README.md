@@ -180,14 +180,16 @@ For each test, over the last `--window` runs (default 50), skipped runs ignored:
 | class | typical evidence (heuristic rules; see `classify/heuristic.py`) |
 |---|---|
 | `stale_element` | `StaleElementReferenceException`, "not attached to the page document", detached-from-DOM, Puppeteer/Playwright detached context |
-| `timing_wait` | `TimeoutException`, "Expected condition failed", `NoSuchElementException`, `ElementClickInterceptedException`, "not clickable at point", `ElementNotInteractable`, jest/Playwright timeouts, assertions that caught a "Loading..." state |
-| `network_env` | connection refused/reset, DNS, read timeouts, 5xx, TLS, ChromeDriver/DevTools disconnects, `SessionNotCreated`, disk/memory exhaustion |
+| `timing_wait` | `TimeoutException`, "Expected condition failed", `NoSuchElementException`, `ElementClickInterceptedException`, "not clickable at point", `ElementNotInteractable`, jest timeouts, Playwright `Timeout Nms exceeded` / "waiting for locator" / "element is not stable" / "intercepts pointer events" / strict-mode violations, assertions that caught a "Loading..." state |
+| `network_env` | connection refused/reset, DNS, read timeouts, 5xx, TLS, ChromeDriver/DevTools disconnects, `SessionNotCreated`, disk/memory exhaustion, "Target page, context or browser has been closed" |
 | `shared_state` | DB locks/deadlocks, `ConcurrentModificationException`, port already in use, files held by another process, singleton/cache/leftover-row vocabulary |
 | `order_dependence` | TestNG dependency skips, "previous test", "in isolation", missing fixtures/tables, random-order plugins in play |
 | `data` | timezone/DST, locale/encoding, float precision, random/Faker values, unordered collections compared as ordered, hard-coded dates |
 | `unknown` | no rule cleared the 0.35 bar; the classifier abstains instead of guessing |
 
 Selenium-specific choices: stale-element is its own class and wins over a wrapping `TimeoutException`; click-intercepted and no-such-element are filed under `timing_wait` (the page was not ready), but a Selenium timeout whose trace says `Read timed out` goes to `network_env` because the more specific cause outranks the generic wrapper.
+
+Playwright support (added after running journeyprobe's output through flakewatch): the rules read the failure *message*, never the JUnit `type`, which is only a weak hint (a bare `TimeoutError` scores 0.30, below the 0.35 bar, so it can never decide alone; runners that put everything under one type such as `StepFailed` classify exactly the same). A Playwright strict-mode violation (the locator briefly matched several elements) is filed under `timing_wait` because in a test that sometimes passes it is usually a transient duplicate render, not a data problem. Playwright's own "element is not attached" is not a rule on purpose: Selenium uses that wording for *stale* elements. Adding these rules did not change the synthetic benchmark (the corpus has no Playwright templates), so the numbers below say nothing about Playwright accuracy; that is covered only by unit tests.
 
 ### The three engines
 
