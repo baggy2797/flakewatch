@@ -230,3 +230,91 @@ def test_anthropic_client_requires_key(monkeypatch):
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     with pytest.raises(RuntimeError, match="ANTHROPIC_API_KEY"):
         AnthropicClient()
+
+
+# --- Playwright (finding F-01 from the qa-suite-demo harness) ---------------------------------------
+
+
+@pytest.mark.parametrize(
+    "exc,msg,expected",
+    [
+        # Verbatim from journeyprobe's JUnit: this used to come back as "unknown".
+        (
+            "StepFailed",
+            "step 2 (click): Locator.click: Timeout 1500ms exceeded.",
+            Cause.TIMING_WAIT,
+        ),
+        ("Error", "page.waitForSelector: Timeout 30000ms exceeded.", Cause.TIMING_WAIT),
+        (
+            "Error",
+            "expect(locator).toBeVisible() ... waiting for getByTestId('result')",
+            Cause.TIMING_WAIT,
+        ),
+        (
+            "TimeoutError",
+            "Locator.fill: waiting for locator('#q')\n  - element is not enabled",
+            Cause.TIMING_WAIT,
+        ),
+        (
+            "Error",
+            "locator.click: <div class='overlay'> intercepts pointer events",
+            Cause.TIMING_WAIT,
+        ),
+        (
+            "Error",
+            "Locator.click: element is not stable - retrying click action",
+            Cause.TIMING_WAIT,
+        ),
+        ("Error", "Locator.click: element is outside of the viewport", Cause.TIMING_WAIT),
+        (
+            "Error",
+            "Error: strict mode violation: getByRole('link') resolved to 2 elements",
+            Cause.TIMING_WAIT,
+        ),
+        ("Error", "Target page, context or browser has been closed", Cause.NETWORK_ENV),
+        ("Error", "page.goto: net::ERR_CONNECTION_REFUSED at http://shop:8431/", Cause.NETWORK_ENV),
+        (
+            "Error",
+            "Execution context was destroyed, most likely because of a navigation",
+            Cause.STALE_ELEMENT,
+        ),
+    ],
+)
+def test_playwright_wording(exc, msg, expected):
+    out = H.classify(ev(exc, msg))
+    assert out.category == expected, out.rationale
+    assert out.confidence > 0 and out.evidence
+
+
+@pytest.mark.parametrize("exc", ["StepFailed", "TimeoutError", "StepError", "AssertionError", ""])
+def test_timeout_message_is_classified_from_the_message_whatever_the_failure_type(exc):
+    out = H.classify(ev(exc, "Locator.click: Timeout 1500ms exceeded."))
+    assert out.category == Cause.TIMING_WAIT
+
+
+def test_selenium_stale_wording_is_not_pulled_towards_timing_by_the_playwright_rules():
+    out = H.classify(
+        ev(
+            "org.openqa.selenium.StaleElementReferenceException",
+            "stale element reference: element is not attached to the page document",
+        )
+    )
+    assert out.category == Cause.STALE_ELEMENT and out.confidence >= 0.9
+
+
+def test_failure_type_alone_is_only_a_hint_and_never_decides():
+    out = H.classify(ev("TimeoutError", "step failed"))
+    assert out.category == Cause.UNKNOWN and "below" in out.rationale
+
+
+def test_type_hint_adds_confidence_when_the_message_agrees():
+    plain = H.classify(ev("StepFailed", "Locator.click: Timeout 1500ms exceeded."))
+    hinted = H.classify(ev("TimeoutError", "Locator.click: Timeout 1500ms exceeded."))
+    assert hinted.confidence >= plain.confidence
+
+
+def test_a_transport_error_in_the_trace_outranks_a_navigation_timeout():
+    out = H.classify(
+        ev("Error", "page.goto: Timeout 30000ms exceeded.", "net::ERR_CONNECTION_RESET")
+    )
+    assert out.category == Cause.NETWORK_ENV

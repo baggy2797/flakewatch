@@ -56,6 +56,23 @@ RULES: list[Rule] = [
        0.5, "explicit race/loading wording"),
     _r(C.TIMING_WAIT, r"(expected|but was|got|assert).{0,40}(loading|spinner|pending|in progress)", 0.5,
        "assertion saw a transient UI state"),
+    # --- Playwright (journeyprobe, @playwright/test, playwright-python) -------------------------
+    _r(C.TIMING_WAIT, r"Timeout \d+ ?ms exceeded", 0.75, "Playwright action/expect timeout"),
+    _r(C.TIMING_WAIT, r"waiting for (locator|getBy\w*|get_by_\w+|frame_?[Ll]ocator|frame)\b", 0.6,
+       "Playwright 'waiting for locator' call log"),
+    _r(C.TIMING_WAIT, r"element is not (stable|visible|enabled)|intercepts pointer events|"
+       r"outside of the viewport|retrying \w+ action", 0.8,
+       "Playwright actionability check failed (UI not settled)"),
+    # ("element is not attached" is deliberately not here: Selenium uses it for STALE elements, above.)
+    # A strict-mode violation means the locator briefly matched several elements. In a test that
+    # sometimes passes that is usually a transient render (old and new list items on screen together),
+    # i.e. a timing problem, not a data problem.
+    _r(C.TIMING_WAIT, r"strict mode violation", 0.6,
+       "locator matched several elements (transient duplicate render?)"),
+    # The failure `type` attribute is only a hint: 0.3 is below MIN_SCORE, so it can never decide alone.
+    _r(C.TIMING_WAIT, r"\bTimeoutError\b", 0.3, "TimeoutError failure type (hint)"),
+    _r(C.NETWORK_ENV, r"Target page, context or browser has been closed|browser has been closed|"
+       r"Page closed|Context closed", 0.85, "Playwright browser/page/context died"),
     # --- Network / environment ----------------------------------------------------------------
     _r(C.NETWORK_ENV, r"ECONNREFUSED|ECONNRESET|ETIMEDOUT|EAI_AGAIN|ENOTFOUND", 0.9,
        "socket-level error code"),
