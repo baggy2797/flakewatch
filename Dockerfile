@@ -1,12 +1,12 @@
 # syntax=docker/dockerfile:1
-FROM python:3.12-slim AS build
+FROM python:3.15-slim AS build
 WORKDIR /src
 RUN pip install --no-cache-dir --disable-pip-version-check build
 COPY pyproject.toml README.md LICENSE ./
 COPY src ./src
 RUN python -m build --wheel --outdir /dist
 
-FROM python:3.12-slim
+FROM python:3.15-slim
 LABEL org.opencontainers.image.title="flakewatch" \
       org.opencontainers.image.description="Flaky-test detection and root-cause classification from JUnit XML" \
       org.opencontainers.image.source="https://github.com/baggy2797/flakewatch" \
